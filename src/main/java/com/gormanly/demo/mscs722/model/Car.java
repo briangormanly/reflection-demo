@@ -19,4 +19,8 @@ public class Car extends CommonState {
         super();
     }
 
+    public void beep(String sound) {
+        System.out.println(model + "'s go " + sound);
+    }
+
 }
