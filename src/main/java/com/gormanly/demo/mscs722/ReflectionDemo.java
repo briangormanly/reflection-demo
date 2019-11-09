@@ -57,34 +57,28 @@ public class ReflectionDemo {
             FdfCommonServices.save(Car.class, pilot);
         }
 
-        Field firstNameField = null;
-        Field yearField = null;
+        // get all the cars
+        List<Car> allCars = FdfCommonServices.getAllCurrent(Car.class);
 
-        try {
+        // use reflection to decompose the Car class and the objects at runtime
+        if(allCars != null && allCars.size() > 0) {
 
-            firstNameField = boxster.getClass().getField("model");
-            System.out.println("[Refleciton: Field] Name -> " + firstNameField.getName());
-            System.out.println("[Refleciton: Field] Type -> " + firstNameField.getType());
-            System.out.println("[Refleciton: Field] value -> " + firstNameField.get(boxster));
+            Class workingClass1 = allCars.getClass();
+            System.out.println("[Reflection: get class] -> " + workingClass1.getName());
 
-            yearField = boxster.getClass().getField("year");
-            System.out.println("[Refleciton: Field] Name -> " + yearField.getName());
-            System.out.println("[Refleciton: Field] Type -> " + yearField.getType());
-            System.out.println("[Refleciton: Field] value -> " + yearField.get(boxster));
+            Class workingClass2 = allCars.get(0).getClass();
+            System.out.println("[Reflection: get class] -> " + workingClass2.getName());
+
+            for (Field field : workingClass2.getFields()) {
+                System.out.println("[Reflection: field] Name -> " + field.getName());
+                System.out.println("[Reflection: field] Type -> " + field.getType());
+                System.out.println("[Reflection: field] Number of Annotations -> " + field.getAnnotations().length);
+            }
+
 
         }
-        catch(Exception e) {
-            e.printStackTrace();
-        }
 
 
-
-        try {
-            System.out.println("[Refleciton: Field] Pilot value -> " + yearField.get(pilot));
-        }
-        catch (Exception e) {
-
-        }
 
 
     }
