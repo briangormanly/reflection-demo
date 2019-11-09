@@ -39,14 +39,17 @@ public class ReflectionDemo {
         boxster.currentDriverId = brian.id;
         boxster = FdfCommonServices.save(Car.class, boxster).current;
 
+        Field firstNameField = null;
+        Field yearField = null;
 
         try {
-            Field firstNameField = boxster.getClass().getField("model");
+
+            firstNameField = boxster.getClass().getField("model");
             System.out.println("[Refleciton: Field] Name -> " + firstNameField.getName());
             System.out.println("[Refleciton: Field] Type -> " + firstNameField.getType());
             System.out.println("[Refleciton: Field] value -> " + firstNameField.get(boxster));
 
-            Field yearField = boxster.getClass().getField("year");
+            yearField = boxster.getClass().getField("year");
             System.out.println("[Refleciton: Field] Name -> " + yearField.getName());
             System.out.println("[Refleciton: Field] Type -> " + yearField.getType());
             System.out.println("[Refleciton: Field] value -> " + yearField.get(boxster));
@@ -55,6 +58,24 @@ public class ReflectionDemo {
         catch(Exception e) {
             e.printStackTrace();
         }
+
+        // create another car
+        Car pilot = new Car();
+        pilot.make = CarMake.HONDA;
+        pilot.model = "Pilot";
+        pilot.year = 2019;
+        pilot.name = "Family Hauler";
+        pilot.color = "Maroon";
+        pilot.currentDriverId = brian.id;
+        FdfCommonServices.save(Car.class, pilot);
+
+        try {
+            System.out.println("[Refleciton: Field] Pilot value -> " + yearField.get(pilot));
+        }
+        catch (Exception e) {
+
+        }
+
 
     }
 
