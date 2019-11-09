@@ -66,14 +66,18 @@ public class ReflectionDemo {
             Class workingClass1 = allCars.getClass();
             System.out.println("[Reflection: get class] -> " + workingClass1.getName());
 
+            /*
             Class workingClass2 = allCars.get(0).getClass();
             System.out.println("[Reflection: get class] -> " + workingClass2.getName());
+            */
 
+            /*
             for (Field field : workingClass2.getFields()) {
                 System.out.println("[Reflection: field] Name -> " + field.getName());
                 System.out.println("[Reflection: field] Type -> " + field.getType());
                 System.out.println("[Reflection: field] Number of Annotations -> " + field.getAnnotations().length);
             }
+            */
 
 
         }
