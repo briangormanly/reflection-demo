@@ -7,10 +7,8 @@ import com.fdflib.util.FdfSettings;
 import com.gormanly.demo.mscs722.model.Car;
 import com.gormanly.demo.mscs722.model.CarMake;
 import com.gormanly.demo.mscs722.model.Driver;
-import com.sun.media.sound.FFT;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,30 +44,7 @@ public class ReflectionDemo {
             boxster = FdfCommonServices.save(Car.class, boxster).current;
         }
 
-        try {
-            Car rCar = Car.class.newInstance();
-
-
-            /*
-            Method[] carActions = rCar.getClass().getMethods();
-            for(Method action: carActions) {
-                System.out.println("a method: " + action.getName());
-                if(action.getName().equals("beep")) {
-                    try {
-                        action.invoke(boxster, "toot");
-                    } catch (InvocationTargetException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-            */
-
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-
+        System.out.println("It worked! " + brian.firstName);
     }
 
 

@@ -1,5 +1,6 @@
 package com.gormanly.demo.mscs722.model;
 
+import com.fdflib.annotation.FdfIgnore;
 import com.fdflib.model.state.CommonState;
 
 public class Car extends CommonState {
