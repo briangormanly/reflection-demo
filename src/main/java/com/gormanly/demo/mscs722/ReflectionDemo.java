@@ -7,8 +7,8 @@ import com.fdflib.util.FdfSettings;
 import com.gormanly.demo.mscs722.model.Car;
 import com.gormanly.demo.mscs722.model.CarMake;
 import com.gormanly.demo.mscs722.model.Driver;
-import com.sun.media.sound.FFT;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,22 +21,64 @@ public class ReflectionDemo {
         setupFdfLib();
 
         // create a diver the normal way
-        Driver brian = new Driver();
-        brian.firstName = "Brian";
-        brian.lastName = "Gormanly";
-        brian.phoneNumber = "867-5309";
-        brian = FdfCommonServices.save(Driver.class, brian).current;
+        Driver brian = FdfCommonServices.getEntityCurrentById(Driver.class, 1);
+        if(brian == null) {
+            brian = new Driver();
+            brian.firstName = "Brian";
+            brian.lastName = "Gormanly";
+            brian.phoneNumber = "867-5309";
+            brian = FdfCommonServices.save(Driver.class, brian).current;
+        }
 
         // create a car the normal way
-        Car boxster = new Car();
-        boxster.color = "Seal Gray";
-        boxster.make = CarMake.PORSCHE;
-        boxster.model = "Boxster S";
-        boxster.year = 2001;
-        boxster.isInNeedOfRepair = false;
-        boxster.name = "Lonely in the winter";
-        boxster.currentDriverId = brian.id;
-        boxster = FdfCommonServices.save(Car.class, boxster).current;
+        Car boxster = FdfCommonServices.getEntityCurrentById(Car.class, 1);
+        if(boxster == null) {
+            boxster = new Car();
+            boxster.color = "Seal Gray";
+            boxster.make = CarMake.PORSCHE;
+            boxster.model = "Boxster S";
+            boxster.year = 2001;
+            boxster.isInNeedOfRepair = false;
+            boxster.name = "Lonely in the winter";
+            boxster.currentDriverId = brian.id;
+            boxster = FdfCommonServices.save(Car.class, boxster).current;
+        }
+
+        // create another car
+        Car pilot = FdfCommonServices.getEntityCurrentById(Car.class, 2);
+        if(pilot == null) {
+            pilot = new Car();
+            pilot.make = CarMake.HONDA;
+            pilot.model = "Pilot";
+            pilot.year = 2019;
+            pilot.name = "Family Hauler";
+            pilot.color = "Maroon";
+            pilot.currentDriverId = brian.id;
+            FdfCommonServices.save(Car.class, pilot);
+        }
+
+        // get all the cars
+        List<Car> allCars = FdfCommonServices.getAllCurrent(Car.class);
+
+        // use reflection to decompose the Car class and the objects at runtime
+        if(allCars != null && allCars.size() > 0) {
+
+            Class workingClass1 = allCars.getClass();
+            System.out.println("[Reflection: get class] -> " + workingClass1.getName());
+
+            Class workingClass2 = allCars.get(0).getClass();
+            System.out.println("[Reflection: get class] -> " + workingClass2.getName());
+
+            for (Field field : workingClass2.getFields()) {
+                System.out.println("[Reflection: field] Name -> " + field.getName());
+                System.out.println("[Reflection: field] Type -> " + field.getType());
+                System.out.println("[Reflection: field] Number of Annotations -> " + field.getAnnotations().length);
+            }
+
+
+        }
+
+
 
 
     }
