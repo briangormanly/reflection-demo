@@ -22,22 +22,28 @@ public class ReflectionDemo {
         setupFdfLib();
 
         // create a diver the normal way
-        Driver brian = new Driver();
-        brian.firstName = "Brian";
-        brian.lastName = "Gormanly";
-        brian.phoneNumber = "867-5309";
-        brian = FdfCommonServices.save(Driver.class, brian).current;
+        Driver brian = FdfCommonServices.getEntityCurrentById(Driver.class, 1);
+        if(brian == null) {
+            brian = new Driver();
+            brian.firstName = "Brian";
+            brian.lastName = "Gormanly";
+            brian.phoneNumber = "867-5309";
+            brian = FdfCommonServices.save(Driver.class, brian).current;
+        }
 
         // create a car the normal way
-        Car boxster = new Car();
-        boxster.color = "Seal Gray";
-        boxster.make = CarMake.PORSCHE;
-        boxster.model = "Boxster S";
-        boxster.year = 2001;
-        boxster.isInNeedOfRepair = false;
-        boxster.name = "Lonely in the winter";
-        boxster.currentDriverId = brian.id;
-        boxster = FdfCommonServices.save(Car.class, boxster).current;
+        Car boxster = FdfCommonServices.getEntityCurrentById(Car.class, 1);
+        if(boxster == null) {
+            boxster = new Car();
+            boxster.color = "Seal Gray";
+            boxster.make = CarMake.PORSCHE;
+            boxster.model = "Boxster S";
+            boxster.year = 2001;
+            boxster.isInNeedOfRepair = false;
+            boxster.name = "Lonely in the winter";
+            boxster.currentDriverId = brian.id;
+            boxster = FdfCommonServices.save(Car.class, boxster).current;
+        }
 
         Field firstNameField = null;
         Field yearField = null;
@@ -60,14 +66,18 @@ public class ReflectionDemo {
         }
 
         // create another car
-        Car pilot = new Car();
-        pilot.make = CarMake.HONDA;
-        pilot.model = "Pilot";
-        pilot.year = 2019;
-        pilot.name = "Family Hauler";
-        pilot.color = "Maroon";
-        pilot.currentDriverId = brian.id;
-        FdfCommonServices.save(Car.class, pilot);
+        Car pilot = FdfCommonServices.getEntityCurrentById(Car.class, 2);
+        if(pilot == null) {
+            pilot = new Car();
+            pilot.make = CarMake.HONDA;
+            pilot.model = "Pilot";
+            pilot.year = 2019;
+            pilot.name = "Family Hauler";
+            pilot.color = "Maroon";
+            pilot.currentDriverId = brian.id;
+            FdfCommonServices.save(Car.class, pilot);
+        }
+
 
         try {
             System.out.println("[Refleciton: Field] Pilot value -> " + yearField.get(pilot));
