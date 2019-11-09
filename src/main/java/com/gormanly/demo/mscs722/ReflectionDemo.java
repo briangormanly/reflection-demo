@@ -1,0 +1,69 @@
+package com.gormanly.demo.mscs722;
+
+import com.fdflib.persistence.database.DatabaseUtil;
+import com.fdflib.service.impl.FdfCommonServices;
+import com.fdflib.util.FdfSettings;
+import com.gormanly.demo.mscs722.model.Car;
+import com.gormanly.demo.mscs722.model.CarMake;
+import com.gormanly.demo.mscs722.model.Driver;
+import com.sun.media.sound.FFT;
+
+public class ReflectionDemo {
+
+    public static void main(String[] args) {
+        System.out.println("Reflection Demo!"); // Display the string.
+
+        // initialize 4dfLib
+        setupFdfLib();
+
+        // create a diver the normal way
+        Driver brian = new Driver();
+        brian.firstName = "Brian";
+        brian.lastName = "Gormanly";
+        brian.phoneNumber = "867-5309";
+        brian = FdfCommonServices.save(Driver.class, brian).current;
+
+        // create a car the normal way
+        Car boxster = new Car();
+        boxster.color = "Seal Gray";
+        boxster.make = CarMake.PORSCHE;
+        boxster.model = "Boxster S";
+        boxster.year = 2001;
+        boxster.isInNeedOfRepair = false;
+        boxster.name = "Lonely in the winter";
+        boxster.currentDriverId = brian.id;
+        boxster = FdfCommonServices.save(Car.class, boxster).current;
+
+
+    }
+
+
+    private static void setupFdfLib() {
+
+        // get the 4dflib settings singleton
+        FdfSettings fdfSettings = FdfSettings.getInstance();
+
+        // MySQL settings
+        fdfSettings.PERSISTENCE = DatabaseUtil.DatabaseType.MYSQL;
+        fdfSettings.DB_PROTOCOL = DatabaseUtil.DatabaseProtocol.JDBC_MYSQL;
+
+        // Database encoding
+        fdfSettings.DB_ENCODING = DatabaseUtil.DatabaseEncoding.UTF8;
+
+        // Application Database name
+        fdfSettings.DB_NAME = "reflectionDemo";
+
+        // Database host
+        fdfSettings.DB_HOST = "localhost";
+
+        // Database user information
+        fdfSettings.DB_USER = "reflectionDemo";
+        fdfSettings.DB_PASSWORD = "reflectionDemo";
+
+        // root user settings are only required for initial database creation.  Once the database is created you
+        // should remove this information
+        fdfSettings.DB_ROOT_USER = "root";
+        fdfSettings.DB_ROOT_PASSWORD = "";
+
+    }
+}
