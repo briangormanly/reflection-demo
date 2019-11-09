@@ -1,12 +1,16 @@
 package com.gormanly.demo.mscs722;
 
 import com.fdflib.persistence.database.DatabaseUtil;
+import com.fdflib.service.FdfServices;
 import com.fdflib.service.impl.FdfCommonServices;
 import com.fdflib.util.FdfSettings;
 import com.gormanly.demo.mscs722.model.Car;
 import com.gormanly.demo.mscs722.model.CarMake;
 import com.gormanly.demo.mscs722.model.Driver;
 import com.sun.media.sound.FFT;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReflectionDemo {
 
@@ -64,6 +68,18 @@ public class ReflectionDemo {
         // should remove this information
         fdfSettings.DB_ROOT_USER = "root";
         fdfSettings.DB_ROOT_PASSWORD = "";
+
+
+
+        // Create a array that will hold the classes that make up our 4df data model
+        List<Class> myModel = new ArrayList<>();
+
+        // Add our 2 classes
+        myModel.add(Driver.class);
+        myModel.add(Car.class);
+
+        // call the initialization of library!
+        FdfServices.initializeFdfDataModel(myModel);
 
     }
 }
