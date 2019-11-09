@@ -9,6 +9,7 @@ import com.gormanly.demo.mscs722.model.CarMake;
 import com.gormanly.demo.mscs722.model.Driver;
 import com.sun.media.sound.FFT;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +39,22 @@ public class ReflectionDemo {
         boxster.currentDriverId = brian.id;
         boxster = FdfCommonServices.save(Car.class, boxster).current;
 
+
+        try {
+            Field firstNameField = boxster.getClass().getField("model");
+            System.out.println("[Refleciton: Field] Name -> " + firstNameField.getName());
+            System.out.println("[Refleciton: Field] Type -> " + firstNameField.getType());
+            System.out.println("[Refleciton: Field] value -> " + firstNameField.get(boxster));
+
+            Field yearField = boxster.getClass().getField("year");
+            System.out.println("[Refleciton: Field] Name -> " + yearField.getName());
+            System.out.println("[Refleciton: Field] Type -> " + yearField.getType());
+            System.out.println("[Refleciton: Field] value -> " + yearField.get(boxster));
+
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
