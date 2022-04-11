@@ -95,27 +95,27 @@ public class ReflectionDemo {
         // get the 4dflib settings singleton
         FdfSettings fdfSettings = FdfSettings.getInstance();
 
-        // MySQL settings
-        fdfSettings.PERSISTENCE = DatabaseUtil.DatabaseType.MYSQL;
-        fdfSettings.DB_PROTOCOL = DatabaseUtil.DatabaseProtocol.JDBC_MYSQL;
+        // PostgreSQL settings
+        fdfSettings.PERSISTENCE = DatabaseUtil.DatabaseType.POSTGRES;
+        fdfSettings.DB_PROTOCOL = DatabaseUtil.DatabaseProtocol.JDBC_POSTGRES;
 
         // Database encoding
         fdfSettings.DB_ENCODING = DatabaseUtil.DatabaseEncoding.UTF8;
 
         // Application Database name
-        fdfSettings.DB_NAME = "reflectionDemo";
+        fdfSettings.DB_NAME = "reflectiondemo";
 
         // Database host
         fdfSettings.DB_HOST = "localhost";
 
         // Database user information
-        fdfSettings.DB_USER = "reflectionDemo";
-        fdfSettings.DB_PASSWORD = "reflectionDemo";
+        fdfSettings.DB_USER = "reflectiondemo";
+        fdfSettings.DB_PASSWORD = "reflectiondemo";
 
         // root user settings are only required for initial database creation.  Once the database is created you
         // should remove this information
-        fdfSettings.DB_ROOT_USER = "root";
-        fdfSettings.DB_ROOT_PASSWORD = "";
+        fdfSettings.DB_ROOT_USER = "postgres";
+        fdfSettings.DB_ROOT_PASSWORD = "postgres";
 
 
 
