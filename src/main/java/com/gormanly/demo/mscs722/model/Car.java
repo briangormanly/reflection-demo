@@ -13,7 +13,7 @@ public class Car extends CommonState {
     public String description = "";
     public Boolean isInNeedOfRepair = true;
     public Boolean isOnCall = true;
-    public Boolean isOutWorking = null;
+    public Boolean isOutWorking = false;
     public long currentDriverId = -1L;
 
     @FdfIgnore
