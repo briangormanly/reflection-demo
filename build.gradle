@@ -6,6 +6,7 @@ group 'com.gormanly.demo.mscs722'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 defaultTasks = ['clean', 'jar']
 
@@ -13,10 +14,13 @@ mainClassName = "com.gormanly.demo.mscs722.ReflectionDemo"
 
 repositories {
     mavenCentral()
+    maven {
+        url "https://oss.sonatype.org/content/repositories/snapshots/"
+    }
 }
 
 dependencies {
-    compile "org.slf4j:slf4j-api:1.7.12",
-            "com.fdflib:4dflib:1.3",
+    implementation "org.slf4j:slf4j-api:1.7.12",
+            "com.fdflib:4dflib:1.4.1-SNAPSHOT",
             "ch.qos.logback:logback-classic:1.1.2"
 }
